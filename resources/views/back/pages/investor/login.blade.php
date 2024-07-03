@@ -5,7 +5,7 @@
 							<div class="login-title">
 								<h2 class="text-center text-primary">Login To Basiru</h2>
 							</div>
-							<form action="{{ route('web.loginHandler') }}" method="POST">
+							<form action="{{ route('investor.login_handler') }}" method="POST">
                             @csrf
                             @if (Session::get('fail'))
                             <div class="alert alert-danger">
@@ -16,7 +16,7 @@
                                 </button>
                             </div>
                             @endif
-							<div class="select-role">
+							<!-- <div class="select-role">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
         <label class="btn">
             <input type="radio" name="options" id="admin">
@@ -35,7 +35,7 @@
             Umkm</a>
         </label>
     </div>
-</div>
+</div> -->
 
 
 								

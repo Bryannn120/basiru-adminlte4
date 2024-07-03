@@ -16,13 +16,14 @@ class Authenticate extends Middleware
         if ($request->routeIs('admin.*')) {
             session()->flash('fail', 'You must login first');
             return route('admin.login');
-        } elseif ($request->routeIs('investor.*')) {
-            session()->flash('fail', 'You must login first');
-            return route('investor.login');
-        } elseif ($request->routeIs('umkm.*')) {
-            session()->flash('fail', 'You must login first');
-            return route('umkm.login');
         }
+             elseif ($request->routeIs('investor.*')) {
+                session()->flash('fail', 'You must login first');
+                return route('login');
+            } elseif ($request->routeIs('umkm.*')) {
+                session()->flash('fail', 'You must login first');
+                return route('login');
+            }
     }
     
     // Jika request expectsJson() atau tidak cocok dengan rute di atas, kembalikan null

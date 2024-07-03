@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,30 +11,19 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+
+    protected  $guard = "user";
+
     /**
+     * 
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'username', 'email', 'password',
+        'username', 'email', 'password', 'role', 'full_name', 'gender', 'alamat',
     ];
 
-    public function isAdmin()
-    {
-        return $this->role === 'admin';
-    }
-
-    public function isUmkm()
-    {
-        return $this->role === 'umkm';
-    }
-
-    public function isInvestor()
-    {
-        return $this->role === 'investor';
-    }
-    
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -54,4 +42,45 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Check if the user is an admin.
+     *
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Check if the user is an UMKM.
+     *
+     * @return bool
+     */
+    public function isUmkm()
+    {
+        return $this->role === 'umkm';
+    }
+
+    /**
+     * Check if the user is an investor.
+     *
+     * @return bool
+     */
+    public function isInvestor()
+    {
+        return $this->role === 'investor';
+    }
+
+    /**
+     * Set the user's password.
+     *
+     * @param string $password
+     * @return void
+     */
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
 }

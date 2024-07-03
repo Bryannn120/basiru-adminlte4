@@ -20,19 +20,7 @@ class Admin extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'id_UMKM',
-        'id_Enterpreneur',
-        'Deskripsi',
-        'Nama_UMKM',
-        'Status_UMKM',
-        'Bidang_UsahaUMKM',
-        'Alamat',
-        'Target_Dana',
-        'Dana_Terkumpul',
-        'Tgl_Mulai',
-        'Tgl_Berakhir',
-        'Create',
-        'Update',
+       'name', 'email', 'username', 'password',
 
     ];
 

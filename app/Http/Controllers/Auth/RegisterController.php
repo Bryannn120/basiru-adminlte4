@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -11,19 +12,20 @@ class RegisterController extends Controller
 {
     public function showRegistrationForm()
     {
-        return view('back.pages.admin.register');
+        return view('back.pages.admin.auth.register');
     }
 
-    public function register(Request $request)
+    public function registrasiHandler(Request $request)
     {
-        $this->validator($request->all())->validate();
+        // Lakukan validasi data input
+        $validator = $this->validator($request->all());
+        $validator->validate();
 
+        // Buat pengguna baru jika validasi berhasil
         $user = $this->create($request->all());
 
-        // Anda bisa login user setelah pendaftaran jika diperlukan
-        // Auth::login($user);
-
-        return redirect('back.pages.admin.register')->with('success', 'Registrasi berhasil!');
+        // Redirect ke halaman login atau halaman lain
+        return redirect()->route('admin.login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 
     protected function validator(array $data)
@@ -32,20 +34,21 @@ class RegisterController extends Controller
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role' => ['required', 'string', 'in:umkm,investor'],
+            'role' => ['required', 'string', 'in:umkm,investor'], // Sesuaikan dengan role yang diperlukan
             'full_name' => ['required', 'string', 'max:255'],
-            'gender' => ['required', 'string', 'in:male,female'],
+            'gender' => ['required', 'string', 'in:male,female'], // Sesuaikan dengan opsi gender yang diperlukan
             'alamat' => ['required', 'string', 'max:255'],
         ]);
     }
 
     protected function create(array $data)
     {
+        // Simpan data pengguna baru ke dalam database
         return User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => $data['role'],
+            'role' => $data['role'], // Sesuaikan dengan field yang digunakan di dalam tabel users
             'full_name' => $data['full_name'],
             'gender' => $data['gender'],
             'alamat' => $data['alamat'],

@@ -47,7 +47,16 @@
                 "bigdecimal",
                 "bignum",
                 "brick",
-                "math"
+                "math",
+                "admin",
+                "back-end",
+                "css",
+                "js",
+                "less",
+                "responsive",
+                "template",
+                "theme",
+                "web"
             ],
             "support": {
                 "issues": "https://github.com/brick/math/issues",

@@ -19,28 +19,28 @@ class InvestorController extends Controller
 
         if($fieldType == 'email'){
           $request->validate([
-            'login_id'=>'required|email|exists:investors,email',
+            'users'=>'required|email|exists:investors,email',
             'password'=>'required|min:5|max:45'
         ],[
-            'login_id.required'=>'Email or Username is required',
-            'login_id.email'=>'Invalid email address',
-            'login_id.exists'=>'Email is not exists in system',
+            'users.required'=>'Email or Username is required',
+            'users.email'=>'Invalid email address',
+            'users.exists'=>'Email is not exists in system',
             'password.required'=>'Password is required'
         ]);
 
         }else{
             $request->validate([
-                'login_id'=>'required|exists:investors,username',
+                'users'=>'required|exists:investors,username',
                 'password'=>'required|min:5|max:45'
             ],[
-                'login_id.required'=>'Email or Username is required',
-                'login_id.exists'=>'Username is not exists in system',
+                'users.required'=>'Email or Username is required',
+                'users.exists'=>'Username is not exists in system',
                 'password.required'=>'Password is salah'
             ]);
         }
 
         $creds = array(
-            $fieldType =>$request->login_id,
+            $fieldType =>$request->users,
             'password' =>$request->password
         ); 
 

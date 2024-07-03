@@ -51,7 +51,7 @@
 					<li style="display: inline; margin-right: 10px;"><a href="{{ route('admin.investor') }}">Investor</a></li>
 					<li style="display: inline; margin-right: 10px;"><a href="{{ route('admin.interprener') }}">Umkm</a></li>
 					<li style="display: inline; margin-right: 10px;"><a href="{{ route('admin.about') }}">About Us</a></li>
-					
+					<li style="display: inline; margin-right: 10px;"><a href="{{ route('show_registration_form') }}" class="tbl-biru">Register</a></li>
 					<li style="display: inline; margin-right: 10px;"><a href="{{ route('admin.login') }}" class="tbl-biru">Login</a></li>
 				</ul>
 			</div>

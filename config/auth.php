@@ -47,7 +47,7 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'user' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
@@ -96,12 +96,12 @@ return [
             'model' => App\Models\Admin::class,
         ],
 
-        'umkms' => [
+        'umkm' => [
             'driver' => 'eloquent',
             'model' => App\Models\umkm::class,
         ],
 
-        'investors' => [
+        'investor' => [
             'driver' => 'eloquent',
             'model' => App\Models\investor::class,
         ],
@@ -137,6 +137,7 @@ return [
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,
+            
         ],
 
         

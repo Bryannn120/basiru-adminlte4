@@ -59,13 +59,13 @@
 	<div class="login-header box-shadow">
 		<div class="container-fluid d-flex justify-content-between align-items-center">
 			<div class="brand-logo">
-				<a href="{{ route('admin.login') }}">
+				<a href="{{ route('loginmulti') }}">
 					<img src="/back/vendors/images/basiru.png" alt="" />
 				</a>
 			</div>
 			<div class="login-menu">
 				<ul>
-					<li style="display: inline; margin-right: 10px;"><a href="{{ route('admin.login') }}" class="tbl-biru">Login</a></li>
+					<li style="display: inline; margin-right: 10px;"><a href="{{ route('loginmulti') }}" class="tbl-biru">Login</a></li>
 					<li style="display: inline; margin-right: 10px;"><a href="{{ route('admin.welcome') }}" class="tbl-biru">Home</a></li>
 
 				</ul>
@@ -80,96 +80,117 @@
 				</div>
 				<div class="col-md-6 col-lg-5">
 					<div class="register-box bg-white box-shadow border-radius-15">
-						<form action="{{ route('admin.register') }}" method="POST">
-							<div class="wizard-content">
-								<form class="tab-wizard2 wizard-circle wizard">
-									<h5>Basic Account Credentials</h5>
-									<section>
-										<div class="form-wrap max-width-600 mx-auto">
-											<div class="form-group row">
-												<label class="col-sm-4 col-form-label">Email Address*</label>
-												<div class="col-sm-8">
-													<input type="email" class="form-control" />
-												</div>
-											</div>
-											<div class="form-group row">
-												<label class="col-sm-4 col-form-label">Username*</label>
-												<div class="col-sm-8">
-													<input type="text" class="form-control" />
-												</div>
-											</div>
-											<div class="form-group row">
-												<label class="col-sm-4 col-form-label">Password*</label>
-												<div class="col-sm-8">
-													<input type="password" class="form-control" />
-												</div>
-											</div>
-											<div class="form-group row">
-												<label class="col-sm-4 col-form-label">Confirm Password*</label>
-												<div class="col-sm-8">
-													<input type="password" class="form-control" />
-												</div>
-											</div>
-											<div class="form-group row align-items-center">
-												<label class="col-sm-4 col-form-label">Role*</label>
-												<div class="col-sm-8">
-													<div class="custom-control custom-radio custom-control-inline pb-0">
-														<input type="radio" id="investor" name="role" class="custom-control-input" />
-														<label class="custom-control-label" for="investor">Investor</label>
-													</div>
-													<div class="custom-control custom-radio custom-control-inline pb-0">
-														<input type="radio" id="umkm" name="role" class="custom-control-input" />
-														<label class="custom-control-label" for="umkm">Umkm</label>
-													</div>
-												</div>
-											</div>
-										</div>
+					<form action="{{ route('register') }}" method="POST">
+    @csrf
+    @if (Session::get('fail'))
+    <div class="alert alert-danger">
+        {{ Session::get('fail') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
 
-										<!-- Step 2 -->
-										<div id="personal_info" class="hidden">
-											<h3>Personal Information</h3>
-											<div class="form-group row">
-												<label class="col-sm-4 col-form-label">Full Name*</label>
-												<div class="col-sm-8">
-													<input type="text" class="form-control" />
-												</div>
-											</div>
-											<div class="form-group row align-items-center">
-												<label class="col-sm-4 col-form-label">Gender*</label>
-												<div class="col-sm-8">
-													<div class="custom-control custom-radio custom-control-inline pb-0">
-														<input type="radio" id="male" name="gender" class="custom-control-input" />
-														<label class="custom-control-label" for="male">Male</label>
-													</div>
-													<div class="custom-control custom-radio custom-control-inline pb-0">
-														<input type="radio" id="female" name="gender" class="custom-control-input" />
-														<label class="custom-control-label" for="female">Female</label>
-													</div>
-												</div>
-											</div>
-											<div class="form-group row">
-												<label class="col-sm-4 col-form-label">Alamat*</label>
-												<div class="col-sm-8">
-													<input type="text" class="form-control" />
-												</div>
-											</div>
-										</div><br>
-										<div class="form-group"><label class="col-sm-4 col-form-label"></label>
-												<input type="submit" value="Register" class="btn btn-primary" aria-label="Register">
-										</div>
+    <div class="wizard-content">
+        <h5>Basic Account Credentials</h5>
+        <section>
+            <div class="form-wrap max-width-600 mx-auto">
+                <div class="form-group row">
+                    <label for="email" class="col-sm-4 col-form-label">Email Address*</label>
+                    <div class="col-sm-8">
+                        <input id="email" type="email" class="form-control" name="email" value="{{ old('users') }}" required autocomplete="email">
+                        @error('email')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="username" class="col-sm-4 col-form-label">Username*</label>
+                    <div class="col-sm-8">
+                        <input id="username" type="text" class="form-control" name="username" value="{{ old('users') }}" required autocomplete="username">
+                        @error('username')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password" class="col-sm-4 col-form-label">Password*</label>
+                    <div class="col-sm-8">
+                        <input id="password" type="password" class="form-control" name="password" required autocomplete="new-password">
+                        @error('password')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password_confirmation" class="col-sm-4 col-form-label">Confirm Password*</label>
+                    <div class="col-sm-8">
+                        <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                    </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label class="col-sm-4 col-form-label">Role*</label>
+                    <div class="col-sm-8">
+                        <div class="custom-control custom-radio custom-control-inline pb-0">
+                            <input type="radio" id="role_investor" name="role" class="custom-control-input" value="investor" {{ old('role') == 'investor' ? 'checked' : '' }}>
+                            <label class="custom-control-label" for="role_investor">Investor</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline pb-0">
+                            <input type="radio" id="role_umkm" name="role" class="custom-control-input" value="umkm" {{ old('role') == 'umkm' ? 'checked' : '' }}>
+                            <label class="custom-control-label" for="role_umkm">UMKM</label>
+                        </div>
+                        @error('role')
+                        <br><span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+        </section>
 
-									</section>
-							</div>
-							<script>
-								function togglePersonalInfo() {
-									var personalInfo = document.getElementById('personal_info');
-									personalInfo.classList.remove('hidden');
-								}
-							</script>
+        <!-- Step 2 -->
+        <div id="personal_info" class="hidden">
+            <h3>Personal Information</h3>
+            <div class="form-group row">
+                <label for="full_name" class="col-sm-4 col-form-label">Full Name*</label>
+                <div class="col-sm-8">
+                    <input id="full_name" type="text" class="form-control" name="full_name" value="{{ old('full_name') }}" required autocomplete="name">
+                    @error('full_name')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+            <div class="form-group row align-items-center">
+                <label class="col-sm-4 col-form-label">Gender*</label>
+                <div class="col-sm-8">
+                    <div class="custom-control custom-radio custom-control-inline pb-0">
+                        <input type="radio" id="gender_male" name="gender" class="custom-control-input" value="male" {{ old('gender') == 'male' ? 'checked' : '' }}>
+                        <label class="custom-control-label" for="gender_male">Male</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline pb-0">
+                        <input type="radio" id="gender_female" name="gender" class="custom-control-input" value="female" {{ old('gender') == 'female' ? 'checked' : '' }}>
+                        <label class="custom-control-label" for="gender_female">Female</label>
+                    </div>
+                    @error('gender')
+                    <br><span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="alamat" class="col-sm-4 col-form-label">Alamat*</label>
+                <div class="col-sm-8">
+                    <input id="alamat" type="text" class="form-control" name="alamat" value="{{ old('alamat') }}" required autocomplete="address">
+                    @error('alamat')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+        </div>
 
-
-
-						</form>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </div>
+</form>
 					</div>
 				</div>
 			</div>
